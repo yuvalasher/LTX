@@ -1,21 +1,19 @@
-# PyTorch Implementation of Explainer-Explained Architecture (LTX) for Vision Models
+# PyTorch Implementation of Learning to Explain: A Model-Agnostic Framework for Explaining Black Box Models
 
-A Learning Framework for Explaining Vision Models (LTX)
-
-This paper introduces the Learning To eXplain Architecture (LTX), a novel architecture for post-hoc explanations for vision models. LTX incorporates an _explainer_ model designed to generate explanation maps that emphasize the most crucial regions that justify the predictions of the model being _explained_. The training regimen for the explainer involves an initial pre-training stage, followed by a per-instance finetuning stage. The optimization during both stages employs a unique configuration in which the explained model's prediction for a masked input is compared to its original prediction for the unmasked input. This approach enables a novel counterfactual objective, aiming to anticipate the model's result using masked versions of the input image. Notably, LTX is model-agnostic and showcases its capacity to yield explanations for both Transformer-based and convolutional models. Our evaluations show that LTX substantially surpasses the current state-of-the-art in explainability for vision Transformers while delivering competitive results in explaining convolutional models.
+In this paper, we present Learning To Explain (LTX), a new framework for providing post-hoc explanations for vision models. The LTX framework introduces an ``explainer'' model that generates explanation maps, highlighting the crucial regions that justify the predictions made by the model being explained. To train the explainer, we employ a two-stage process consisting of initial pre-training followed by per-instance finetuning. During both stages of training, we utilize a unique configuration where we compare the explained model's prediction for a masked input with its original prediction for the unmasked input. This approach enables the use of a novel counterfactual objective, which aims to anticipate the model's output using masked versions of the input image. Importantly, the LTX framework is not restricted to a specific model architecture and can provide explanations for both Transformer-based and convolutional models. Through our evaluations, we demonstrate that LTX significantly outperforms the current state-of-the-art in explainability across both vision Transformers and convolutional models.
 
 <img src="images\2_classes_vis_github.png" alt="2_classes_vis_github" width="250" height="200" align:center/>
 
 <img src="images\single_object_vis_github.png" alt="single_object_vis_github" width="200" height="350" align:center />
 
 
-## Reproducing results on ViT-Base & ViT-Small - Pertubations Metrics
+## Reproducing results on ViT - Perturbations Metrics
 ---
 ### Loading Checkpoints:
 - Download `checkpoints.zip` from https://drive.google.com/file/d/1syOvmnXFgMsIgu-10LNhm0pHDs2oo1gm/
-- unzip classifier.zip -d ./checkpoints/ (after unzipping, the checkpointes should be in the corresponding folders based on the backbone's type (`vit_base` / `vit_small`))
+- unzip classifier.zip -d ./checkpoints/ (after unzipping, the checkpoints should be in the corresponding folders based on the backbone's type (`vit_base`))
 
-These checkpoints are important for reproducing the results. All explanation metrics can be calculated using the mask files created during the LTX procedure.
+These checkpoints are essential for reproducing the results. All explanation metrics can be calculated using the mask files created during the LTX procedure.
 
 ### Evaluations
 
@@ -41,7 +39,7 @@ CUDA_VISIBLE_DEVICES=0 PYTHONPATH=./:$PYTHONPATH nohup python main/seg_classific
 ## Reproducing results on ViT-Base & ViT-Small - Segmentation Results
 
 ---
-### Download the segmentaion datasets:
+### Download the segmentation datasets:
 - Download imagenet_dataset [Link to download dataset](http://calvin-vision.net/bigstuff/proj-imagenet/data/gtsegs_ijcv.mat)
 - Download the COCO_Val2017 [Link to download dataset](https://cocodataset.org/#download)
 - Download Pascal_val_2012 [Link to download dataset](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/index.html)
